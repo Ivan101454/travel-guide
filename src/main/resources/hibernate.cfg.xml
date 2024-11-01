@@ -24,7 +24,12 @@
         <property name="hibernate.connection.characterEncoding">utf8</property>
         <property name="hibernate.connection.useUnicode">true</property>
 
-<!--        <mapping class="ru.clevertec.homeworkservlet.entities.User" />-->
+        <mapping class="ru.clevertec.travelguide.entities.Author" />
+        <mapping class="ru.clevertec.travelguide.entities.Charter" />
+        <mapping class="ru.clevertec.travelguide.entities.Comment" />
+        <mapping class="ru.clevertec.travelguide.entities.Guide" />
+        <mapping class="ru.clevertec.travelguide.entities.Picture" />
+        <mapping class="ru.clevertec.travelguide.entities.User" />
 
     </session-factory>
 
