@@ -15,7 +15,7 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import java.time.LocalDateTime;
-import java.util.Map;
+import java.util.List;
 
 @Data
 @NoArgsConstructor
@@ -38,5 +38,5 @@ public class Guide implements BaseEntity<Long> {
     private Picture headPicture;
     private String descriptionOfGuide;
     @OneToMany(mappedBy = "guide")
-    private Map<String, Charter> contentsCharter;
+    private List<Charter> contentsCharter;
 }

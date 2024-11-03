@@ -32,7 +32,7 @@ public class AuthorIT {
     @Test
     void shouldSaveAuthor() {
         session.beginTransaction();
-        Author agatha = Author.builder().nameAuthor("Agatha").build();
+        Author agatha = Author.builder().nameAuthor("Conan").build();
         Author save = authorRepository.save(agatha);
         assertEquals(agatha.getNameAuthor(), save.getNameAuthor());
         session.getTransaction().commit();

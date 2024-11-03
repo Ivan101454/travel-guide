@@ -32,15 +32,18 @@ public class AuthorServiceIT {
 
     @Test
     void shouldFindAllAuthor() {
+        session.beginTransaction();
         authorService.findAllAuthor().forEach(System.out::println);
-
+        session.getTransaction().commit();
     }
 
     @Test
     void shouldFindAuthor() {
+        session.beginTransaction();
         Optional<AuthorDto> byId = authorService.findById(1L);
+        byId.get().getNameAuthor();
         assertEquals("Agatha", byId.get().getNameAuthor());
-
+        session.getTransaction().commit();
     }
 
 
