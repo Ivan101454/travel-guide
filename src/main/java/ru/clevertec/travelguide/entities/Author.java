@@ -20,6 +20,7 @@ import lombok.NoArgsConstructor;
 public class Author implements BaseEntity<Long> {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "author_id")
     private Long id;
     @Column(unique = true)
     private String nameAuthor;

@@ -12,14 +12,18 @@ import jakarta.persistence.Table;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
+import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
+import org.hibernate.annotations.CreationTimestamp;
 
 import java.time.LocalDateTime;
+import java.util.ArrayList;
 import java.util.List;
 
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
+@EqualsAndHashCode(of = "nameOfGuide")
 @Builder
 @Entity
 @Table(name = "guide", schema = "guide")
@@ -29,6 +33,7 @@ public class Guide implements BaseEntity<Long> {
     @Column(name = "guide_id")
     private Long id;
     private String nameOfGuide;
+    @CreationTimestamp
     private LocalDateTime dateOfCreate;
     @OneToOne
     @JoinColumn(name = "author_id")
@@ -37,6 +42,12 @@ public class Guide implements BaseEntity<Long> {
     @JoinColumn(name = "picture_id")
     private Picture headPicture;
     private String descriptionOfGuide;
+    @Builder.Default
     @OneToMany(mappedBy = "guide")
-    private List<Charter> contentsCharter;
+    private List<Charter> contentsCharter = new ArrayList<>();
+
+    public void addCharter(Charter charter) {
+        charter.setGuide(this);
+        contentsCharter.add(charter);
+    }
 }

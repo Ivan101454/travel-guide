@@ -4,6 +4,7 @@ import lombok.RequiredArgsConstructor;
 import ru.clevertec.travelguide.dao.Repository;
 import ru.clevertec.travelguide.dto.PictureDto;
 import ru.clevertec.travelguide.entities.Picture;
+import ru.clevertec.travelguide.mapper.MapperGuide;
 
 import java.util.List;
 import java.util.Optional;
@@ -15,26 +16,28 @@ public class PictureService implements Service<Picture, PictureDto, Long> {
 
     @Override
     public Optional<PictureDto> findById(Long id) {
-        return Optional.empty();
+        return pictureRepository.finById(id).map(MapperGuide.INSTANCE::pictureToPictureDto);
     }
 
     @Override
     public List<PictureDto> findAllAuthor() {
-        return List.of();
+        return pictureRepository.findAll().stream().map(MapperGuide.INSTANCE::pictureToPictureDto).toList();
     }
 
     @Override
     public Picture create(PictureDto dto) {
-        return null;
+        return pictureRepository.save(MapperGuide.INSTANCE.pictureDtoToPicture(dto));
     }
 
     @Override
     public void update(PictureDto dto) {
-
+        pictureRepository.update(MapperGuide.INSTANCE.pictureDtoToPicture(dto));
     }
 
     @Override
     public boolean delete(Long id) {
-        return false;
+        Optional<Picture> picture = pictureRepository.finById(id);
+        picture.ifPresent(p -> pictureRepository.delete(p.getId()));
+        return picture.isPresent();
     }
 }

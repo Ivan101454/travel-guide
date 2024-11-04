@@ -26,7 +26,6 @@ public class Picture implements BaseEntity<Long> {
     private String namePicture;
     private String descriptionOfPicture;
     private String pathToPictureFile;
-    private String placeOfPicture;
     @OneToOne
     private Author authorOfPicture;
 }

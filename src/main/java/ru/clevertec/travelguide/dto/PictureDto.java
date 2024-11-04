@@ -15,6 +15,5 @@ public class PictureDto implements Dto {
     private String namePicture;
     private String descriptionOfPicture;
     private String pathToPictureFile;
-    private String placeOfPicture;
     private Author authorOfPicture;
 }

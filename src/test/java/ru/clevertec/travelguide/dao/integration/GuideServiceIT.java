@@ -6,45 +6,38 @@ import org.junit.jupiter.api.AfterAll;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 import ru.clevertec.travelguide.dao.AuthorRepository;
-import ru.clevertec.travelguide.dto.AuthorDto;
+import ru.clevertec.travelguide.dao.GuideRepository;
+import ru.clevertec.travelguide.dto.GuideDto;
 import ru.clevertec.travelguide.service.AuthorService;
+import ru.clevertec.travelguide.service.GuideService;
 import ru.clevertec.travelguide.utils.HibernateUtil;
 
 import java.lang.reflect.Proxy;
 import java.util.Optional;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
+public class GuideServiceIT {
 
-public class AuthorServiceIT {
     static SessionFactory sessionFactory;
     static Session session;
-    static AuthorRepository authorRepository;
-    static AuthorService authorService;
+    static GuideRepository guideRepository;
+    static GuideService guideService;
 
     @BeforeAll
     static void initDatabaseSession() {
         sessionFactory = HibernateUtil.buildSessionFactory();
         session = (Session) Proxy.newProxyInstance(SessionFactory.class.getClassLoader(), new Class[]{Session.class},
                 ((proxy, method, args) -> method.invoke(sessionFactory.getCurrentSession(), args)));
-        authorRepository = new AuthorRepository(session);
-        authorService = new AuthorService(authorRepository);
+        guideRepository = new GuideRepository(session);
+        guideService = new GuideService(guideRepository);
     }
 
     @Test
-    void shouldFindAllAuthor() {
+    void shouldReturnListOfCharter() {
         session.beginTransaction();
-        authorService.findAllAuthor().forEach(System.out::println);
+        Optional<GuideDto> biId = guideService.findById(1L);
+        biId.get().getContentsCharter().forEach(System.out::println);
         session.getTransaction().commit();
     }
-
-    @Test
-    void shouldFindAuthor() {
-        session.beginTransaction();
-        Optional<AuthorDto> byId = authorService.findById(1L);
-        assertEquals("Agatha", byId.get().getNameAuthor());
-        session.getTransaction().commit();
-    }
-
 
     @AfterAll
     static void closeDatabase() {
