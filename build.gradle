@@ -26,6 +26,10 @@ dependencies {
     implementation 'org.glassfish.web:jakarta.servlet.jsp.jstl:3.0.1'
     implementation 'jakarta.servlet.jsp.jstl:jakarta.servlet.jsp.jstl-api:3.0.2'
 
+    // https://mvnrepository.com/artifact/net.bytebuddy/byte-buddy
+    implementation 'net.bytebuddy:byte-buddy:1.15.10'
+
+
     implementation('org.hibernate:hibernate-core:6.0.2.Final')
     runtimeOnly 'org.postgresql:postgresql:42.7.4'
     implementation('org.glassfish.jaxb:jaxb-runtime:3.0.2')
@@ -38,9 +42,6 @@ dependencies {
 
     implementation 'org.mapstruct:mapstruct:1.6.2'
     annotationProcessor 'org.mapstruct:mapstruct-processor:1.6.2'
-
-    // https://mvnrepository.com/artifact/org.slf4j/slf4j-log4j12
-
 
     testImplementation("org.junit.jupiter:junit-jupiter-api:${junitVersion}")
     testRuntimeOnly("org.junit.jupiter:junit-jupiter-engine:${junitVersion}")
