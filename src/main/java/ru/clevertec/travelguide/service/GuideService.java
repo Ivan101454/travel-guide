@@ -1,7 +1,10 @@
 package ru.clevertec.travelguide.service;
 
 import jakarta.transaction.Transactional;
-import lombok.RequiredArgsConstructor;
+import lombok.Data;
+import lombok.EqualsAndHashCode;
+import lombok.Getter;
+import lombok.ToString;
 import ru.clevertec.travelguide.dao.Repository;
 import ru.clevertec.travelguide.dto.GuideDto;
 import ru.clevertec.travelguide.entities.Guide;
@@ -10,7 +13,7 @@ import ru.clevertec.travelguide.mapper.MapperGuide;
 import java.util.List;
 import java.util.Optional;
 
-@RequiredArgsConstructor
+@Data
 public class GuideService implements Service<Guide, GuideDto, Long> {
 
     private final Repository<Long, Guide> guideRepository;

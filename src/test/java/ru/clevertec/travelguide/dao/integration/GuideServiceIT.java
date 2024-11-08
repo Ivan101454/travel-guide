@@ -1,5 +1,6 @@
 package ru.clevertec.travelguide.dao.integration;
 
+import jakarta.transaction.Transactional;
 import net.bytebuddy.ByteBuddy;
 import net.bytebuddy.implementation.MethodDelegation;
 import net.bytebuddy.matcher.ElementMatchers;
@@ -28,6 +29,7 @@ public class GuideServiceIT {
     static GuideRepository guideRepository;
     static GuideService guideService;
 
+    @Transactional
     @BeforeAll
     static void initDatabaseSession() throws NoSuchMethodException, InvocationTargetException, InstantiationException, IllegalAccessException {
         sessionFactory = HibernateUtil.buildSessionFactory();
@@ -35,6 +37,7 @@ public class GuideServiceIT {
                 ((proxy, method, args) -> method.invoke(sessionFactory.getCurrentSession(), args)));
         guideRepository = new GuideRepository(session);
         var guideService1 = new GuideService(guideRepository);
+
 
         TransactionInterceptor transactionInterceptor = new TransactionInterceptor(sessionFactory);
         guideService = new ByteBuddy()

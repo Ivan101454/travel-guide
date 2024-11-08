@@ -6,6 +6,7 @@ import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.Table;
+import jakarta.validation.constraints.NotNull;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -23,5 +24,6 @@ public class Author implements BaseEntity<Long> {
     @Column(name = "author_id")
     private Long id;
     @Column(unique = true)
+    @NotNull
     private String nameAuthor;
 }
